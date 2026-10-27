@@ -1,0 +1,18 @@
+{
+  "name": "pingspace-lite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PingSpace Lite - A modern lightweight messaging application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --watch server.js",
+    "test": "jest --runInBand --detectOpenHandles --forceExit"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}
