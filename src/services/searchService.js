@@ -16,8 +16,6 @@ class SearchService {
       (contact.role && contact.role.toLowerCase().includes(normalizedQuery))
     );
 
-    // Intentional Bug 3: String Processing / Case-Insensitive Search
-    // Query is lowercased, but message text is checked directly without toLowerCase()
     const matchingMessages = allMessages
       .filter(msg => msg.text.includes(normalizedQuery))
       .map(msg => {

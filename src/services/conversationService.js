@@ -23,12 +23,9 @@ class ConversationService {
 
       const convMessages = allMessages.filter(m => m.conversationId === conv.id);
 
-      // Sort by createdAt ascending to determine latest message
       convMessages.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       const lastMessage = convMessages.length > 0 ? convMessages[convMessages.length - 1] : null;
 
-      // Calculate unread count
-      // Intentional Bug 2: Counting Logic / Array Filtering
       const unreadCount = convMessages.filter(msg => !msg.readAt).length;
 
       return {
@@ -46,7 +43,6 @@ class ConversationService {
       };
     });
 
-    // Sort conversations according to their actual latest message time
     conversationsWithMeta.sort((a, b) => {
       const timeA = a.lastMessage ? new Date(a.lastMessage.createdAt).getTime() : new Date(a.createdAt).getTime();
       const timeB = b.lastMessage ? new Date(b.lastMessage.createdAt).getTime() : new Date(b.createdAt).getTime();

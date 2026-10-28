@@ -125,7 +125,6 @@ class StoreRepository {
     const now = new Date().toISOString();
 
     store.messages = store.messages.map(msg => {
-      // Mark as read only if it belongs to this conversation, is unread, and was sent by someone else
       if (msg.conversationId === convId && !msg.readAt && msg.senderId !== readerId) {
         updatedCount++;
         return { ...msg, readAt: now };

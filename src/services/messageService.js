@@ -12,7 +12,6 @@ class MessageService {
       return null;
     }
 
-    // Intentional Bug 4: Hash Maps / Filtering by Conversation ID
     if (this.lastConversationId && this.conversationCache.has(this.lastConversationId)) {
       return this.conversationCache.get(this.lastConversationId);
     }
@@ -20,7 +19,6 @@ class MessageService {
     const allMessages = storeRepository.getAllMessages();
     const convMessages = allMessages.filter(m => m.conversationId === conversationId);
 
-    // Intentional Bug 1: Array Sorting / Chronological Ordering
     convMessages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     this.conversationCache.set(conversationId, convMessages);
@@ -51,7 +49,6 @@ class MessageService {
       text: text.trim()
     });
 
-    // Invalidate cached messages for this conversation
     this.conversationCache.delete(conversationId);
     if (this.lastConversationId === conversationId) {
       this.lastConversationId = null;

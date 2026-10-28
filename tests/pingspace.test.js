@@ -10,7 +10,6 @@ beforeEach(() => {
   messageService.clearCache();
 });
 
-// Bug 1: Array Sorting and Chronological Ordering
 test('test_message_chronological_ordering', async () => {
   const res = await request(app).get('/api/conversations/conv-1/messages');
   expect(res.status).toBe(200);
@@ -23,10 +22,7 @@ test('test_message_chronological_ordering', async () => {
   }
 });
 
-// Bug 2: Unread Counting Logic and Array Filtering
 test('test_unread_count_calculation', async () => {
-  // In conv-4: msg-401 is incoming read, msg-402 is outgoing by user-alex
-  // Incoming unread count should be 0
   const res = await request(app).get('/api/conversations');
   expect(res.status).toBe(200);
   const conv4 = res.body.find(c => c.id === 'conv-4');
@@ -34,10 +30,7 @@ test('test_unread_count_calculation', async () => {
   expect(conv4.unreadCount).toBe(0);
 });
 
-// Bug 3: Case-Insensitive String Processing and Search
 test('test_case_insensitive_message_search', async () => {
-  // msg-201 contains 'Morning Alex'
-  // Searching lowercase 'morning' must match
   const res = await request(app).get('/api/search?q=morning');
   expect(res.status).toBe(200);
   expect(res.body.messages).toBeDefined();
@@ -45,7 +38,6 @@ test('test_case_insensitive_message_search', async () => {
   expect(found).toBeDefined();
 });
 
-// Bug 4: Hash Maps and Conversation Selection
 test('test_conversation_selection_and_message_filtering', async () => {
   const res1 = await request(app).get('/api/conversations/conv-1/messages');
   expect(res1.status).toBe(200);
@@ -55,7 +47,6 @@ test('test_conversation_selection_and_message_filtering', async () => {
   expect(res2.status).toBe(200);
   const conv2MessageIds = res2.body.map(m => m.id);
 
-  // conv-2 must return its own messages, not conv-1 messages
   expect(conv2MessageIds).toContain('msg-201');
   expect(conv2MessageIds).not.toContain(conv1MessageIds[0]);
 });
