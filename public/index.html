@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f8fb">
+  <meta name="description" content="PingSpace keeps your team conversations and contacts in one focused workspace.">
   <title>PingSpace Lite — Messaging</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#chatPanel">Skip to conversation</a>
   <div class="app-layout" id="appLayout">
     <!-- Left Navigation Bar -->
     <nav class="nav-sidebar" aria-label="Main Navigation">
@@ -18,7 +21,7 @@
         </div>
         <div class="brand-text">
           <span class="brand-title">PingSpace</span>
-          <span class="brand-badge">LITE</span>
+          <span class="brand-badge">TEAM MESSAGING</span>
         </div>
       </div>
 
@@ -56,6 +59,17 @@
     <!-- Middle Sidebar: Conversation List / Contact List / Search -->
     <aside class="list-sidebar" id="listSidebar">
       <div class="list-header">
+        <div class="inbox-heading">
+          <div>
+            <span class="inbox-kicker">PINGSPACE WORKSPACE</span>
+            <h2 id="inboxHeadingTitle">Messages</h2>
+          </div>
+          <button class="new-message-btn" id="newMessageBtn" type="button" aria-label="Start a new message" title="Start a new message">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"></path>
+            </svg>
+          </button>
+        </div>
         <div class="search-box">
           <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
@@ -68,13 +82,17 @@
 
       <!-- Tab Title / Mode -->
       <div class="list-title-bar">
-        <h2 class="list-title" id="listTitle">Recent Conversations</h2>
+        <h2 class="list-title" id="listTitle">Recent conversations</h2>
         <span class="list-count" id="listCount">0</span>
+      </div>
+      <div class="conversation-filters" id="conversationFilters" role="group" aria-label="Filter conversations">
+        <button class="filter-chip active" id="allFilterBtn" type="button" aria-pressed="true">All</button>
+        <button class="filter-chip" id="unreadFilterBtn" type="button" aria-pressed="false">Unread <span class="filter-count" id="unreadFilterCount">0</span></button>
       </div>
 
       <!-- List Container -->
       <div class="list-container" id="listContainer">
-        <div class="state-indicator loading" id="listLoadingState">
+        <div class="state-indicator loading" id="listLoadingState" role="status" aria-live="polite">
           <div class="spinner"></div>
           <span>Loading conversations...</span>
         </div>
@@ -91,7 +109,7 @@
     </aside>
 
     <!-- Main Panel: Active Conversation -->
-    <main class="chat-panel" id="chatPanel">
+    <main class="chat-panel" id="chatPanel" tabindex="-1">
       <!-- Active Chat Header -->
       <header class="chat-header" id="chatHeader">
         <button class="mobile-back-btn" id="mobileBackBtn" title="Back to conversations" aria-label="Back to conversations">
@@ -120,14 +138,21 @@
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
             </svg>
           </div>
-          <h3>Your PingSpace Messages</h3>
-          <p>Select any conversation on the left or browse your contacts to send a message.</p>
+          <span class="welcome-eyebrow"><span class="welcome-status-dot"></span> YOUR TEAM, IN SYNC</span>
+          <h3>Good conversations start here.</h3>
+          <p>Choose a conversation to pick up where you left off, or start a new one with someone on your team.</p>
+          <button class="browse-contacts-btn" id="emptyStartChatBtn" type="button">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="10" cy="7" r="4"></circle><path d="M20 8v6M23 11h-6"></path>
+            </svg>
+            Start a conversation
+          </button>
         </div>
         <div class="messages-stream" id="messagesStream" style="display: none;"></div>
       </div>
 
       <!-- Feedback / Error Banner -->
-      <div class="feedback-banner" id="feedbackBanner" style="display: none;">
+      <div class="feedback-banner" id="feedbackBanner" role="status" aria-live="polite" style="display: none;">
         <span class="feedback-text" id="feedbackText"></span>
         <button class="feedback-close-btn" id="feedbackCloseBtn">&times;</button>
       </div>

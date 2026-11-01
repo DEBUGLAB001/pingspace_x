@@ -12,10 +12,12 @@
   let contacts = [];
   let searchResults = null;
   let isSending = false;
+  let conversationFilter = 'all';
 
   // DOM Elements
   const navConversationsBtn = document.getElementById('navConversationsBtn');
   const navContactsBtn = document.getElementById('navContactsBtn');
+  const appLayout = document.getElementById('appLayout');
   const totalUnreadBadge = document.getElementById('totalUnreadBadge');
   const currentUserAvatar = document.getElementById('currentUserAvatar');
   const currentUserName = document.getElementById('currentUserName');
@@ -25,6 +27,13 @@
   const clearSearchBtn = document.getElementById('clearSearchBtn');
   const listTitle = document.getElementById('listTitle');
   const listCount = document.getElementById('listCount');
+  const conversationFilters = document.getElementById('conversationFilters');
+  const allFilterBtn = document.getElementById('allFilterBtn');
+  const unreadFilterBtn = document.getElementById('unreadFilterBtn');
+  const unreadFilterCount = document.getElementById('unreadFilterCount');
+  const newMessageBtn = document.getElementById('newMessageBtn');
+  const emptyStartChatBtn = document.getElementById('emptyStartChatBtn');
+  const inboxHeadingTitle = document.getElementById('inboxHeadingTitle');
   const listLoadingState = document.getElementById('listLoadingState');
   const listEmptyState = document.getElementById('listEmptyState');
   const itemsList = document.getElementById('itemsList');
@@ -99,6 +108,10 @@
   function setupEventListeners() {
     navConversationsBtn.addEventListener('click', () => switchTab('conversations'));
     navContactsBtn.addEventListener('click', () => switchTab('contacts'));
+    newMessageBtn.addEventListener('click', () => switchTab('contacts'));
+    emptyStartChatBtn.addEventListener('click', () => switchTab('contacts'));
+    allFilterBtn.addEventListener('click', () => setConversationFilter('all'));
+    unreadFilterBtn.addEventListener('click', () => setConversationFilter('unread'));
 
     let searchDebounceTimeout = null;
     searchInput.addEventListener('input', (e) => {
@@ -128,6 +141,7 @@
     composerForm.addEventListener('submit', handleSendMessage);
 
     mobileBackBtn.addEventListener('click', () => {
+      appLayout.classList.remove('conversation-open');
       chatPanel.classList.remove('active');
     });
   }
@@ -152,17 +166,32 @@
   function switchTab(tab) {
     currentTab = tab;
     hideFeedback();
+    appLayout.classList.remove('conversation-open');
+    chatPanel.classList.remove('active');
 
     navConversationsBtn.classList.toggle('active', tab === 'conversations');
     navContactsBtn.classList.toggle('active', tab === 'contacts');
+    conversationFilters.style.display = tab === 'conversations' ? 'flex' : 'none';
+    inboxHeadingTitle.textContent = tab === 'contacts' ? 'Team contacts' : 'Messages';
+    newMessageBtn.style.display = tab === 'contacts' ? 'none' : 'flex';
 
     if (tab === 'conversations') {
-      listTitle.textContent = 'Recent Conversations';
+      listTitle.textContent = conversationFilter === 'unread' ? 'Unread conversations' : 'Recent conversations';
       renderConversationsList();
     } else if (tab === 'contacts') {
       listTitle.textContent = 'Team Contacts';
       renderContactsList();
     }
+  }
+
+  function setConversationFilter(filter) {
+    conversationFilter = filter;
+    allFilterBtn.classList.toggle('active', filter === 'all');
+    unreadFilterBtn.classList.toggle('active', filter === 'unread');
+    allFilterBtn.setAttribute('aria-pressed', String(filter === 'all'));
+    unreadFilterBtn.setAttribute('aria-pressed', String(filter === 'unread'));
+    listTitle.textContent = filter === 'unread' ? 'Unread conversations' : 'Recent conversations';
+    renderConversationsList();
   }
 
   // Load Conversations
@@ -203,6 +232,7 @@
   // Update Total Unread Badge
   function updateTotalUnreadBadge() {
     const total = conversations.reduce((sum, c) => sum + (c.unreadCount || 0), 0);
+    unreadFilterCount.textContent = total;
     if (total > 0) {
       totalUnreadBadge.textContent = total;
       totalUnreadBadge.style.display = 'flex';
@@ -213,16 +243,21 @@
 
   // Render Conversations List
   function renderConversationsList() {
-    listCount.textContent = conversations.length;
+    const visibleConversations = conversationFilter === 'unread'
+      ? conversations.filter((conversation) => (conversation.unreadCount || 0) > 0)
+      : conversations;
+    listCount.textContent = visibleConversations.length;
     itemsList.innerHTML = '';
 
-    if (conversations.length === 0) {
+    if (visibleConversations.length === 0) {
+      listEmptyState.querySelector('.empty-title').textContent = conversationFilter === 'unread' ? 'You’re all caught up' : 'No conversations yet';
+      listEmptyState.querySelector('.empty-subtitle').textContent = conversationFilter === 'unread' ? 'New unread messages will appear here' : 'Start a conversation with someone on your team';
       listEmptyState.style.display = 'flex';
       return;
     }
     listEmptyState.style.display = 'none';
 
-    conversations.forEach((conv) => {
+    visibleConversations.forEach((conv) => {
       const item = document.createElement('div');
       item.className = `list-item ${conv.id === activeConversationId ? 'active' : ''}`;
       item.dataset.id = conv.id;
@@ -299,6 +334,11 @@
   // Search
   async function performSearch(query) {
     currentTab = 'search';
+    appLayout.classList.remove('conversation-open');
+    chatPanel.classList.remove('active');
+    conversationFilters.style.display = 'none';
+    inboxHeadingTitle.textContent = 'Search';
+    newMessageBtn.style.display = 'none';
     navConversationsBtn.classList.remove('active');
     navContactsBtn.classList.remove('active');
     listTitle.textContent = `Search results for "${query}"`;
@@ -423,6 +463,7 @@
     messageInput.focus();
 
     // Mobile view switch
+    appLayout.classList.add('conversation-open');
     chatPanel.classList.add('active');
 
     // Load Messages
