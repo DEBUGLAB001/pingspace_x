@@ -1052,7 +1052,9 @@ body { background: var(--bg-app); }
 }
 
 /* Selecting a person opens a focused, full-width conversation workspace. */
-.app-layout.conversation-open .list-sidebar { display: none; }
+@media (max-width: 768px) {
+  .app-layout.conversation-open .list-sidebar { display: none; }
+}
 .app-layout.conversation-open .chat-panel { min-width: 0; flex: 1 1 auto; }
 .app-layout.conversation-open .mobile-back-btn {
   width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;

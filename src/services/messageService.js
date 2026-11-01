@@ -67,10 +67,6 @@ class MessageService {
     }
 
     const updatedCount = storeRepository.markMessagesAsRead(conversationId, readerId);
-    this.conversationCache.delete(conversationId);
-    if (this.lastConversationId === conversationId) {
-      this.lastConversationId = null;
-    }
 
     return { success: true, updatedCount };
   }

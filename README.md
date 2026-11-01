@@ -13,12 +13,20 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 
 **Your task:** Ensure messages appear chronologically, with older messages at the top and the newest messages at the bottom.
 
+<p align="center">
+  <img src="docs/images/bug1-chronological-order.png" alt="BUG-01: Messages Displayed in Reverse Order" width="720" />
+</p>
+
 ### BUG-02: Incorrect Unread Message Counts
 **Problem:** Messages sent by the current user are incorrectly contributing to unread notification badges.
 
 **How to identify it:** Open a conversation, send a message, and observe the unread indicators in the conversation list. Check whether your own outgoing messages are being counted as unread.
 
 **Your task:** Ensure unread counts include only incoming, unread messages received from other users.
+
+<p align="center">
+  <img src="docs/images/bug2-unread-count.png" alt="BUG-02: Incorrect Unread Message Counts" width="720" />
+</p>
 
 ### BUG-03: Case-Sensitive Message Search
 **Problem:** Searching for a message using lowercase letters fails to return results when the original message contains uppercase characters.
@@ -27,12 +35,20 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 
 **Your task:** Make message search case-insensitive so that matching results are returned regardless of capitalization.
 
+<p align="center">
+  <img src="docs/images/bug3-search-case-sensitivity.png" alt="BUG-03: Case-Sensitive Message Search" width="720" />
+</p>
+
 ### BUG-04: Incorrect Conversation Switching
 **Problem:** Selecting another contact sometimes continues displaying the previous contact's message history instead of loading the selected conversation.
 
 **How to identify it:** Open one conversation, note its messages, and then select a different contact from the conversation list. Observe whether the message history updates correctly.
 
 **Your task:** Ensure every conversation selection loads only the messages associated with that specific contact.
+
+<p align="center">
+  <img src="docs/images/bug4-conversation-selection.png" alt="BUG-04: Incorrect Conversation Switching" width="720" />
+</p>
 
 ---
 
@@ -48,17 +64,6 @@ PingSpace Lite is a lightweight team communication platform that provides a unif
 - **Unread Notifications:** Track unread incoming messages through conversation badges.
 - **Unified Search:** Search for contacts and messages from a single search interface.
 - **Responsive Interface:** Navigate between contacts and conversations across desktop and mobile screens.
-
-
-
-
-<img width="959" height="413" alt="Screenshot 2026-11-01 023824" src="https://github.com/user-attachments/assets/57bc4a7c-7655-4c4c-b872-b284687472c8" />
-
-
-<img width="667" height="414" alt="image" src="https://github.com/user-attachments/assets/c6d94d27-ba50-409b-b872-90602106adee" />
-
-
-<img width="959" height="413" alt="image" src="https://github.com/user-attachments/assets/a0aa0a71-a6f3-4634-9d67-46d0fa4a96bb" />
 
 ---
 
