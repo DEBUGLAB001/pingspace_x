@@ -112,7 +112,7 @@ class StoreRepository {
       senderId,
       text: text.trim(),
       createdAt: new Date().toISOString(),
-      readAt: senderId === store.user.id ? new Date().toISOString() : null
+      readAt: null
     };
     store.messages.push(newMessage);
     this.writeStore(store);

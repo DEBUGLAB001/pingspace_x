@@ -83,7 +83,7 @@ const initialMessages = [
     senderId: 'user-alex',
     text: 'Hey Maya! Yes, just looked through them. The navigation updates look much cleaner.',
     createdAt: '2026-10-27T09:20:00.000Z',
-    readAt: '2026-10-27T09:21:00.000Z'
+    readAt: null
   },
   {
     id: 'msg-103',
@@ -123,7 +123,7 @@ const initialMessages = [
     senderId: 'user-alex',
     text: 'Looks solid Elena, thanks for keeping it consistent across all endpoints.',
     createdAt: '2026-10-27T08:45:00.000Z',
-    readAt: '2026-10-27T08:46:00.000Z'
+    readAt: null
   },
   {
     id: 'msg-303',

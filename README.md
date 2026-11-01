@@ -13,9 +13,6 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 
 **Your task:** Ensure messages appear chronologically, with older messages at the top and the newest messages at the bottom.
 
-<p align="center">
-  <img src="https://files.catbox.moe/gkgiyq.png" alt="BUG-01: Messages Displayed in Reverse Order" width="720" />
-</p>
 
 ### BUG-02: Incorrect Unread Message Counts
 **Problem:** Messages sent by the current user are incorrectly contributing to unread notification badges.
@@ -24,9 +21,6 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 
 **Your task:** Ensure unread counts include only incoming, unread messages received from other users.
 
-<p align="center">
-  <img src="https://files.catbox.moe/0bv8y5.png" alt="BUG-02: Incorrect Unread Message Counts" width="720" />
-</p>
 
 ### BUG-03: Case-Sensitive Message Search
 **Problem:** Searching for a message using lowercase letters fails to return results when the original message contains uppercase characters.
@@ -35,9 +29,6 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 
 **Your task:** Make message search case-insensitive so that matching results are returned regardless of capitalization.
 
-<p align="center">
-  <img src="https://files.catbox.moe/2omryi.png" alt="BUG-03: Case-Sensitive Message Search" width="720" />
-</p>
 
 ### BUG-04: Incorrect Conversation Switching
 **Problem:** Selecting another contact sometimes continues displaying the previous contact's message history instead of loading the selected conversation.
@@ -46,9 +37,6 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 
 **Your task:** Ensure every conversation selection loads only the messages associated with that specific contact.
 
-<p align="center">
-  <img src="https://files.catbox.moe/5z3nsj.png" alt="BUG-04: Incorrect Conversation Switching" width="720" />
-</p>
 
 ---
 
