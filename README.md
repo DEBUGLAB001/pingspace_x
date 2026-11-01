@@ -34,7 +34,7 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 
 **Problem:** Searching for a message using lowercase letters fails to return results when the original message contains uppercase characters.
 
-**How to identify it:** Open the search bar and search for a word that appears with different capitalization in an existing conversation.
+**How to identify it:** Open the search bar and search for a word that appears with capitalized characters in an existing conversation (e.g., search for `"morning"` or `"sprint"`). Notice that the search returns 0 matches even though messages like *"Morning Alex..."* or *"Sprint planning..."* exist. Conversely, searching for all-lowercase terms like `"layout"` or `"planning"` works.
 
 **Your task:** Make message search case-insensitive so that matching results are returned regardless of capitalization.
 
@@ -44,11 +44,14 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 
 ### BUG-04: Incorrect Conversation Switching
 
-**Problem:** Selecting another contact sometimes continues displaying the previous contact's message history instead of loading the selected conversation.
+**Problem:** When switching between contacts, the chat header updates to the newly selected contact's name, but the message window fails to load their actual conversation history. Instead, it remains stuck displaying the messages from the previously opened contact.
 
-**How to identify it:** Open one conversation, note its messages, and then select a different contact from the conversation list. Observe whether the message history updates correctly.
+**How to identify it:** 
+1. Open an initial conversation (e.g., Maya Chen) and observe her message history.
+2. Next, select a different contact from the list (e.g., Liam Vance).
+3. Notice that while the chat header switches to the new contact, the message area continues displaying the previous contact's messages (e.g., Maya's messages appear under Liam's header, and Liam's own messages never load).
 
-**Your task:** Ensure every conversation selection loads only the messages associated with that specific contact.
+**Your task:** Ensure every conversation selection properly loads and displays only the messages associated with that specific contact.
 
 <p align="center">
   <img src="https://files.catbox.moe/5z3nsj.png" alt="BUG-04: Incorrect Conversation Switching" width="720" />
