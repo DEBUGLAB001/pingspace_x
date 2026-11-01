@@ -18,6 +18,15 @@ function createApp() {
   apiRouter.use('/search', searchRoutes);
   apiRouter.use('/health', healthRoutes);
 
+  // Reset store endpoint for resetting challenge attempt state
+  apiRouter.post('/reset', (req, res) => {
+    const storeRepository = require('./src/repositories/storeRepository');
+    const messageService = require('./src/services/messageService');
+    storeRepository.reset();
+    messageService.clearCache();
+    res.json({ success: true, message: 'Store reset to initial seed data' });
+  });
+
   // Mount API router for standard /api and DEBUG//LAB preview prefix
   app.use('/api', apiRouter);
   app.use('/runtime/:runtimeId/preview/api', apiRouter);
@@ -38,6 +47,12 @@ const app = createApp();
 if (require.main === module) {
   const HOST = '0.0.0.0';
   const PORT = parseInt(process.env.PORT, 10) || 3000;
+
+  // Always reset to initial seed data on startup so each attempt starts completely clean
+  const storeRepository = require('./src/repositories/storeRepository');
+  const messageService = require('./src/services/messageService');
+  storeRepository.reset();
+  messageService.clearCache();
 
   app.listen(PORT, HOST, () => {
     console.log(`PingSpace Lite server listening on http://${HOST}:${PORT}`);
