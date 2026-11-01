@@ -14,7 +14,7 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 **Your task:** Ensure messages appear chronologically, with older messages at the top and the newest messages at the bottom.
 
 <p align="center">
-  <img src="docs/images/bug1-chronological-order.png" alt="BUG-01: Messages Displayed in Reverse Order" width="720" />
+  <img src="https://files.catbox.moe/gkgiyq.png" alt="BUG-01: Messages Displayed in Reverse Order" width="720" />
 </p>
 
 ### BUG-02: Incorrect Unread Message Counts
@@ -25,7 +25,7 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 **Your task:** Ensure unread counts include only incoming, unread messages received from other users.
 
 <p align="center">
-  <img src="docs/images/bug2-unread-count.png" alt="BUG-02: Incorrect Unread Message Counts" width="720" />
+  <img src="https://files.catbox.moe/0bv8y5.png" alt="BUG-02: Incorrect Unread Message Counts" width="720" />
 </p>
 
 ### BUG-03: Case-Sensitive Message Search
@@ -36,7 +36,7 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 **Your task:** Make message search case-insensitive so that matching results are returned regardless of capitalization.
 
 <p align="center">
-  <img src="docs/images/bug3-search-case-sensitivity.png" alt="BUG-03: Case-Sensitive Message Search" width="720" />
+  <img src="https://files.catbox.moe/2omryi.png" alt="BUG-03: Case-Sensitive Message Search" width="720" />
 </p>
 
 ### BUG-04: Incorrect Conversation Switching
@@ -47,7 +47,7 @@ Your responsibility is to investigate the existing codebase, reproduce each issu
 **Your task:** Ensure every conversation selection loads only the messages associated with that specific contact.
 
 <p align="center">
-  <img src="docs/images/bug4-conversation-selection.png" alt="BUG-04: Incorrect Conversation Switching" width="720" />
+  <img src="https://files.catbox.moe/5z3nsj.png" alt="BUG-04: Incorrect Conversation Switching" width="720" />
 </p>
 
 ---
